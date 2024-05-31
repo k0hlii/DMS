@@ -16,6 +16,8 @@ if (!app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseDefaultFiles(); // Enables default file mapping on the web root.
 app.UseStaticFiles();
 
 app.UseRouting();

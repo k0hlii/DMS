@@ -9,6 +9,9 @@ public class DmsDbContext : DbContext
     public DbSet<Developer> Developers { get; init; }
     public DbSet<Project> Projects { get; init;}
     public DbSet<Technologie> Technologies { get; init; }
+    
+    public DbSet<ProjectMember> ProjectMembers { get; init; }
+
 
     public static DmsDbContext Create(IMongoDatabase database) =>
         new(new DbContextOptionsBuilder<DmsDbContext>()
@@ -30,12 +33,12 @@ public class DmsDbContext : DbContext
         modelBuilder.Entity<Technologie>().ToCollection("Technologie");
     }
     
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+   /*  protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        base.OnConfiguring(optionsBuilder);
+       base.OnConfiguring(optionsBuilder);
         var mongoClient = new MongoClient("mongodb+srv://admin:admin1@dmsdb.2pfyaeb.mongodb.net/?retryWrites=true&w=majority&appName=DMSDB");
         optionsBuilder.UseMongoDB(mongoClient, "DMSDB");
-    }
+    }*/
 }
 
 public class Project
@@ -81,4 +84,17 @@ public class Technologie
     public string name { get; set; }
     public string description { get; set; }
     public string Usage { get; set; }
+}
+
+public class ProjectMember
+{
+    public ObjectId _id { get; set; }
+
+    public string IdAsString
+    {
+        get { return _id.ToString(); }
+    }
+    
+    public string ProjectID { get; set; }
+    public string DeveloperID { get; set; }
 }

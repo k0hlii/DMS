@@ -1,8 +1,14 @@
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-builder.Services.AddDbContext<DmsDbContext>();
+builder.Services.AddDbContext<DmsDbContext>(options =>
+{
+    options.UseMongoDB(
+        "mongodb+srv://admin:admin1@dmsdb.2pfyaeb.mongodb.net/?retryWrites=true&w=majority&appName=DMSDB","DMSDB");
+});
 
 var app = builder.Build();
 app.UseCors(builder => builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());

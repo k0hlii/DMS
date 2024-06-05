@@ -22,7 +22,7 @@ public class ProjectController : ControllerBase
     }
 
     [HttpGet("{id}")]
-    public async Task<ActionResult<string>> GetProject(string id)
+    public async Task<ActionResult<Project>> GetProject(string id)
     {
         var project = await _context.Projects.FindAsync(new ObjectId(id)); // Convert string to ObjectId
 
@@ -31,7 +31,7 @@ public class ProjectController : ControllerBase
             return NotFound();
         }
 
-        return project._id.ToString(); // Convert ObjectId to string
+        return project; // Convert ObjectId to string
     }
     
     [HttpPut("{id}")]

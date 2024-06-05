@@ -29,7 +29,7 @@ namespace DMS.Controllers
 
         // GET: api/Developer/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<string>> GetDeveloper(string id)
+        public async Task<ActionResult<Developer>> GetDeveloper(string id)
         {
             var developer = await _context.Developers.FindAsync(new ObjectId(id)); // Convert string to ObjectId
 
@@ -38,7 +38,7 @@ namespace DMS.Controllers
                 return NotFound();
             }
 
-            return developer._id.ToString(); // Convert ObjectId to string
+            return developer;
         }
 
         // PUT: api/Developer/5

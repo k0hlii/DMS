@@ -22,7 +22,7 @@ public class TechnologieController : ControllerBase
     }
 
     [HttpGet("{id}")]
-    public async Task<ActionResult<string>> GetTechnologie(string id)
+    public async Task<ActionResult<Technologie>> GetTechnologie(string id)
     {
         var technologie = await _context.Technologies.FindAsync(new ObjectId(id)); // Convert string to ObjectId
 
@@ -31,7 +31,7 @@ public class TechnologieController : ControllerBase
             return NotFound();
         }
 
-        return technologie._id.ToString(); // Convert ObjectId to string
+        return technologie; // Convert ObjectId to string
     }
     
     [HttpPut("{id}")]
